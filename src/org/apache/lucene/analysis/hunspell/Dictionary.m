@@ -1132,9 +1132,9 @@ NSString *OrgApacheLuceneAnalysisHunspellDictionary_getDictionaryEncodingWithJav
 }
 
 JavaNioCharsetCharsetDecoder *OrgApacheLuceneAnalysisHunspellDictionary_getJavaEncodingWithNSString_(OrgApacheLuceneAnalysisHunspellDictionary *self, NSString *encoding) {
-//  if ([@"ISO8859-14" isEqual:encoding]) {
-//    return create_OrgApacheLuceneAnalysisHunspellISO8859_14Decoder_init();
-//  }
+  if ([@"ISO8859-14" isEqual:encoding]) {
+    @throw [new_JavaLangRuntimeException_initWithNSString_(@"Not translated to Objective-C") autorelease];  // disabled by translate.py
+  }
   NSString *canon = [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES)) getWithId:encoding];
   if (canon != nil) {
     encoding = canon;

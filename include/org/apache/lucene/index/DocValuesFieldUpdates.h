@@ -28,7 +28,7 @@
   OrgApacheLuceneIndexDocValuesType *type_;
 }
 
-//+ (jint)PAGE_SIZE;
+// + (jint)PAGE_SIZE; // disabled by translate.py
 
 #pragma mark Public
 
