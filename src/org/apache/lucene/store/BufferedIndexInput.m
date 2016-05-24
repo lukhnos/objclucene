@@ -161,7 +161,8 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 - (jshort)readShort {
   if (2 <= (bufferLength_ - bufferPosition_)) {
-    return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(buffer_), bufferPosition_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF));
+    jint unseq$1 = bufferPosition_++;
+    return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(buffer_), unseq$1) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF));
   }
   else {
     return [super readShort];
@@ -170,7 +171,10 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 - (jint)readInt {
   if (4 <= (bufferLength_ - bufferPosition_)) {
-    return (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), bufferPosition_++) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF);
+    jint unseq$1 = bufferPosition_++;
+    jint unseq$2 = bufferPosition_++;
+    jint unseq$3 = bufferPosition_++;
+    return (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), unseq$1) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$2) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$3) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF);
   }
   else {
     return [super readInt];
@@ -179,8 +183,14 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 - (jlong)readLong {
   if (8 <= (bufferLength_ - bufferPosition_)) {
-    jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), bufferPosition_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
-    jint i2 = (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
+    jint unseq$1 = bufferPosition_++;
+    jint unseq$2 = bufferPosition_++;
+    jint unseq$3 = bufferPosition_++;
+    jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), unseq$1) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$2) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$3) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
+    jint unseq$4 = bufferPosition_++;
+    jint unseq$5 = bufferPosition_++;
+    jint unseq$6 = bufferPosition_++;
+    jint i2 = (JreLShift32((IOSByteArray_Get(buffer_, unseq$4) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$5) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$6) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
     return (JreLShift64(((jlong) i1), 32)) | (i2 & (jlong) 0xFFFFFFFFLL);
   }
   else {

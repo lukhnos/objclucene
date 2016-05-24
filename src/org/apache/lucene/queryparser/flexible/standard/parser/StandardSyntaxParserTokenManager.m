@@ -802,7 +802,8 @@ jint OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenMa
       kind = (jint) 0x7fffffff;
     }
     ++curPos;
-    if ((i = self->jjnewStateCnt_) == (startsAt = 33 - (self->jjnewStateCnt_ = startsAt))) return curPos;
+    jint unseq$1 = self->jjnewStateCnt_;
+    if ((i = unseq$1) == (startsAt = 33 - (self->jjnewStateCnt_ = startsAt))) return curPos;
     @try {
       self->curChar_ = [((id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>) nil_chk(self->input_stream_)) readChar];
     }
@@ -877,7 +878,8 @@ jint OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenMa
       kind = (jint) 0x7fffffff;
     }
     ++curPos;
-    if ((i = self->jjnewStateCnt_) == (startsAt = 3 - (self->jjnewStateCnt_ = startsAt))) return curPos;
+    jint unseq$1 = self->jjnewStateCnt_;
+    if ((i = unseq$1) == (startsAt = 3 - (self->jjnewStateCnt_ = startsAt))) return curPos;
     @try {
       self->curChar_ = [((id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>) nil_chk(self->input_stream_)) readChar];
     }
@@ -1051,7 +1053,8 @@ jint OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenMa
       kind = (jint) 0x7fffffff;
     }
     ++curPos;
-    if ((i = self->jjnewStateCnt_) == (startsAt = 7 - (self->jjnewStateCnt_ = startsAt))) return curPos;
+    jint unseq$1 = self->jjnewStateCnt_;
+    if ((i = unseq$1) == (startsAt = 7 - (self->jjnewStateCnt_ = startsAt))) return curPos;
     @try {
       self->curChar_ = [((id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>) nil_chk(self->input_stream_)) readChar];
     }

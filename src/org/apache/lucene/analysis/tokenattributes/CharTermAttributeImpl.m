@@ -123,7 +123,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithChar:(jchar)c {
-  *IOSCharArray_GetRef(nil_chk(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, termLength_ + 1)), termLength_++) = c;
+  jint unseq$1 = termLength_;
+  *IOSCharArray_GetRef(nil_chk(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, unseq$1 + 1)), termLength_++) = c;
   return self;
 }
 

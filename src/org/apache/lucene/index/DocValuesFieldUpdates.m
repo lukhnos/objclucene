@@ -19,7 +19,7 @@
 
 /* + (jint)PAGE_SIZE {
   return OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE;
-}*/ // disabled by translate.py
+} */ // disabled by translate.py
 
 - (instancetype)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type {

@@ -55,7 +55,8 @@
   for (jint i = 0; i < longValueCount_ * iterations; ++i) {
     bitsLeft -= bitsPerValue_;
     if (bitsLeft < 0) {
-      *IOSLongArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift64((IOSLongArray_Get(nil_chk(blocks), blocksOffset++) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft)));
+      jint unseq$1 = blocksOffset++;
+      *IOSLongArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift64((IOSLongArray_Get(nil_chk(blocks), unseq$1) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft)));
       bitsLeft += 64;
     }
     else {
@@ -103,7 +104,8 @@
   for (jint i = 0; i < longValueCount_ * iterations; ++i) {
     bitsLeft -= bitsPerValue_;
     if (bitsLeft < 0) {
-      *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) ((JreLShift64((IOSLongArray_Get(nil_chk(blocks), blocksOffset++) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft))));
+      jint unseq$1 = blocksOffset++;
+      *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) ((JreLShift64((IOSLongArray_Get(nil_chk(blocks), unseq$1) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft))));
       bitsLeft += 64;
     }
     else {
