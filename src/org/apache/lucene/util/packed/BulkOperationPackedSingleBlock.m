@@ -247,7 +247,14 @@ OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *create_OrgApacheLuceneU
 
 jlong OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_readLongWithByteArray_withInt_(IOSByteArray *blocks, jint blocksOffset) {
   OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initialize();
-  return (JreLShift64((IOSByteArray_Get(nil_chk(blocks), blocksOffset++) & (jlong) 0xFFLL), 56)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 48)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 40)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 32)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 24)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 16)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL);
+  jint unseq$1 = blocksOffset++;
+  jint unseq$2 = blocksOffset++;
+  jint unseq$3 = blocksOffset++;
+  jint unseq$4 = blocksOffset++;
+  jint unseq$5 = blocksOffset++;
+  jint unseq$6 = blocksOffset++;
+  jint unseq$7 = blocksOffset++;
+  return (JreLShift64((IOSByteArray_Get(nil_chk(blocks), unseq$1) & (jlong) 0xFFLL), 56)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$2) & (jlong) 0xFFLL), 48)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$3) & (jlong) 0xFFLL), 40)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$4) & (jlong) 0xFFLL), 32)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$5) & (jlong) 0xFFLL), 24)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$6) & (jlong) 0xFFLL), 16)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$7) & (jlong) 0xFFLL), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL);
 }
 
 jint OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_decodeWithLong_withLongArray_withInt_(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *self, jlong block, IOSLongArray *values, jint valuesOffset) {
